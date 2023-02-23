@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  web:
+    container_name: vite-app
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    ports:
+      - 3000:5173
+    # env_file:
+    #   - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
