@@ -18,7 +18,7 @@ This template comes with a Docker Compose configuration file that can be used to
 1. Build the Docker image using `docker compose build`.
 2. Start the container using `docker compose up` (or) `docker compose up -d` to start the container in the background.
 3. Access the app in your browser at `http://localhost:3000`.
-4. Since the docker-compose uses volumes, local changes (during development) in the project directory will be reflected in the docker container.
+4. Since the docker-compose file uses volumes, local changes (during development) in the project directory will be reflected in the docker container.
 
 ### Technology Stack
 
