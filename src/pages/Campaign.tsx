@@ -1,13 +1,33 @@
+import { QueryClient, useQuery } from '@tanstack/react-query'
 import { Link, Outlet, useLoaderData, useLocation } from 'react-router-dom'
 
-function Campaign() {
-  const data = useLoaderData()
-  const location = useLocation()
+import { getAllCampaignsQuery } from '../api/tanstack'
+
+export const campaignLoader = (queryClient: QueryClient) => async () => {
+  const query = getAllCampaignsQuery()
   return (
-    <>
-      <Outlet />
-      <div className="my-10 mx-auto flex w-[80%] flex-col">
-        {data.map((cpn) => {
+    queryClient.getQueryData(query.queryKey) ??
+    (await queryClient.fetchQuery(query))
+  )
+}
+
+function Campaign() {
+  const location = useLocation()
+  const initialData = useLoaderData() as Awaited<
+    ReturnType<ReturnType<typeof campaignLoader>>
+  >
+  const campaignsQueryResult = useQuery({
+    ...getAllCampaignsQuery(),
+    initialData,
+  })
+
+  let content
+
+  if (campaignsQueryResult.isLoading) content = <div>Loading</div>
+  else if (campaignsQueryResult.isSuccess)
+    content = (
+      <div className="my-10 mx-auto flex w-[80%] flex-col gap-6">
+        {campaignsQueryResult.data.reverse().map((cpn: any) => {
           return (
             <div
               className="flex flex-col rounded-md bg-gray-50 px-4 py-2 shadow-md "
@@ -36,6 +56,11 @@ function Campaign() {
           )
         })}
       </div>
+    )
+  return (
+    <>
+      <Outlet />
+      {content}
     </>
   )
 }

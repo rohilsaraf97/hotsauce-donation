@@ -3,7 +3,7 @@ import { parseEther } from 'ethers/lib/utils'
 import { useEffect, useState } from 'react'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { FiExternalLink } from 'react-icons/fi'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 import {
   useNetwork,
@@ -15,33 +15,28 @@ import {
 function DonateModal() {
   const navigate = useNavigate()
   const location = useLocation()
-  const campaignInfo = location.state.cpnData
-
-  // const balance = useBalance({ address: session?.address })
   const { chain } = useNetwork()
   const [amount, setAmount] = useState(0)
   const [debouncedAmount] = useDebounce(amount.toString(), 500)
+  // const balance = useBalance({ address: session?.address })
+
+  const campaignInfo = location?.state?.cpnData || undefined
 
   const { config } = usePrepareSendTransaction({
     request: {
-      to: campaignInfo.owner.address,
+      to: campaignInfo ? campaignInfo.owner.address : undefined,
       value: debouncedAmount ? parseEther(debouncedAmount) : undefined,
     },
   })
   const { data, sendTransaction } = useSendTransaction(config)
-
   const { isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
 
   useEffect(() => {
-    if (!location.state) navigate('/user/campaigns', { state: {} })
-  }, [location.state, navigate])
-
-  useEffect(() => {
     if (isSuccess) {
       const donation = async () => {
-        const resp = await axios.post(
+        await axios.post(
           `${import.meta.env.VITE_SERVER_URL}/donation/add`,
           {
             amount,
@@ -67,6 +62,8 @@ function DonateModal() {
     //   }
     // }
   }
+
+  if (!location.state) return <Navigate to="/user/campaigns" state={{}} />
 
   return (
     <div

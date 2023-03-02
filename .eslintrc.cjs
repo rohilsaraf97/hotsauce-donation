@@ -18,7 +18,13 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: ['react', '@typescript-eslint', 'simple-import-sort', 'import'],
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'simple-import-sort',
+    'import',
+    'unused-imports',
+  ],
   rules: {
     'react/react-in-jsx-scope': 0,
     'simple-import-sort/imports': 'error',
@@ -26,5 +32,6 @@ module.exports = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+    'unused-imports/no-unused-imports': 'error',
   },
 }

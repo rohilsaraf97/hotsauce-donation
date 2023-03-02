@@ -1,7 +1,8 @@
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
+
+import { postRequestMessage, postVerify } from '../api/axios'
 
 function SignIn() {
   const navigate = useNavigate()
@@ -12,7 +13,6 @@ function SignIn() {
   const { signMessageAsync } = useSignMessage()
 
   const handleAuth = async () => {
-    // disconnects the web3 provider if it's already active
     if (isConnected) {
       await disconnectAsync()
     }
@@ -23,30 +23,12 @@ function SignIn() {
 
     const userData = { address: account, chain: chain.id, network: 'evm' }
     // making a post request to our 'request-message' endpoint
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/auth/request-message`,
-      userData,
-      {
-        withCredentials: true,
-        headers: {
-          'content-type': 'application/json',
-        },
-      }
-    )
-    const { message } = data
     // signing the received message via metamask
+    const { data } = await postRequestMessage(userData)
+    const { message } = data
     const signature = await signMessageAsync({ message })
+    await postVerify({ message, signature })
 
-    await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/auth/verify`,
-      {
-        message,
-        signature,
-      },
-      { withCredentials: true } // set cookie from Express server
-    )
-
-    // redirect to /user
     navigate('/user')
   }
 

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {
   createBrowserRouter,
   Navigate,
@@ -9,8 +9,10 @@ import { configureChains, createClient, WagmiConfig } from 'wagmi'
 import { polygonMumbai, sepolia } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
 
+import { checkAuth } from './api/axios'
+import AddModal from './components/AddModal'
 import DonateModal from './components/DonateModal'
-import Campaign from './pages/Campaign'
+import Campaign, { campaignLoader } from './pages/Campaign'
 import ErrorPage from './pages/ErrorPage'
 import SignIn from './pages/Signin'
 import User from './pages/User'
@@ -26,16 +28,13 @@ const client = createClient({
   autoConnect: true,
 })
 
+const queryClient = new QueryClient()
+
 const checkSignedIn = async (pathname?: string) => {
   let auth
   let session
   try {
-    const resp = await axios.get(
-      `${import.meta.env.VITE_SERVER_URL}/auth/authenticate`,
-      {
-        withCredentials: true,
-      }
-    )
+    const resp = await checkAuth()
     const { iat, ...authData } = resp.data
     auth = true
     session = authData
@@ -63,24 +62,15 @@ const router = createBrowserRouter([
       {
         path: 'campaigns',
         element: <Campaign />,
-        loader: async () => {
-          try {
-            const resp = await axios.get(
-              `${import.meta.env.VITE_SERVER_URL}/campaign`,
-              {
-                withCredentials: true,
-              }
-            )
-            return resp.data
-          } catch (error) {
-            console.log(error)
-          }
-          return null
-        },
+        loader: () => campaignLoader(queryClient),
         children: [
           {
             path: 'donatemodal',
             element: <DonateModal />,
+          },
+          {
+            path: 'add',
+            element: <AddModal />,
           },
         ],
       },
@@ -95,9 +85,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <WagmiConfig client={client}>
-      <RouterProvider router={router} />
-    </WagmiConfig>
+    <QueryClientProvider client={queryClient}>
+      <WagmiConfig client={client}>
+        <RouterProvider router={router} />
+      </WagmiConfig>
+    </QueryClientProvider>
   )
 }
 
