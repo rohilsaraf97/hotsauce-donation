@@ -15,22 +15,30 @@ export default function User() {
 
   return (
     <div className="flex flex-col font-poppins text-lg">
-      <div className=" flex items-center justify-between bg-pink-600 px-10 text-white">
+      <div className="sticky top-0 z-50 flex items-center justify-between bg-yellow-400 px-10 text-white">
         <div>Fund3</div>
         <div className="flex items-center gap-4">
           <Link
             to="/user/campaigns/add"
-            className="rounded-full p-2 hover:bg-pink-500"
+            className="rounded-full p-2 hover:bg-yellow-500"
           >
             <AiOutlinePlus className="text-2xl" />
           </Link>
           <NavLink
             to="/user/campaigns"
             className={({ isActive }) =>
-              isActive ? 'bg-pink-800 px-2 py-4' : 'px-2 py-4'
+              isActive ? 'bg-yellow-800 px-2 py-4' : 'px-2 py-4'
             }
           >
             Campaigns
+          </NavLink>
+          <NavLink
+            to="/user/donations"
+            className={({ isActive }) =>
+              isActive ? 'bg-yellow-800 px-2 py-4' : 'px-2 py-4'
+            }
+          >
+            Donations
           </NavLink>
           <button type="button" onClick={signOut}>
             Sign Out

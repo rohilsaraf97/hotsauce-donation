@@ -48,7 +48,7 @@ function Campaign() {
               <Link
                 to="donatemodal"
                 state={{ background: location, cpnData: cpn }}
-                className="self-end rounded-md bg-pink-600 px-2 py-2 text-sm text-white"
+                className="self-end rounded-md bg-yellow-600 px-2 py-2 text-sm text-white"
               >
                 Donate
               </Link>

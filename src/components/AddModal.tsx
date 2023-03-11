@@ -60,7 +60,7 @@ function AddModal() {
                 <div>
                   <Field
                     name="title"
-                    className={`w-full rounded-[0.25rem] border border-solid border-pink-200 bg-pink-50 px-4 py-3 text-lg text-black outline-0 focus:ring-0 ${
+                    className={`w-full rounded-[0.25rem] border border-solid border-yellow-200 bg-yellow-50 px-4 py-3 text-lg text-black outline-0 focus:ring-0 ${
                       (props.errors.title && props.touched.title) ||
                       (campaignMutation.isError && 'border-red-500')
                     }`}
@@ -76,7 +76,7 @@ function AddModal() {
                   <Field
                     name="description"
                     component="textarea"
-                    className={`w-full rounded-[0.25rem] border border-solid border-pink-200 bg-pink-50 px-4 py-3 text-lg text-black outline-0 focus:ring-0 ${
+                    className={`w-full rounded-[0.25rem] border border-solid border-yellow-200 bg-yellow-50 px-4 py-3 text-lg text-black outline-0 focus:ring-0 ${
                       (props.errors.description && props.touched.description) ||
                       (campaignMutation.isError && 'border-red-500')
                     }`}
@@ -90,7 +90,7 @@ function AddModal() {
                 </div>
                 <button
                   type="submit"
-                  className={`mt-4 flex w-fit cursor-pointer items-center justify-between gap-1 self-end rounded-[0.25rem] bg-pink-500 px-4 py-2 text-lg font-normal text-white disabled:opacity-40 ${
+                  className={`mt-4 flex w-fit cursor-pointer items-center justify-between gap-1 self-end rounded-[0.25rem] bg-yellow-500 px-4 py-2 text-lg font-normal text-white disabled:opacity-40 ${
                     campaignMutation.isSuccess && 'bg-green-600'
                   }`}
                   disabled={!props.isValid || campaignMutation.isLoading}

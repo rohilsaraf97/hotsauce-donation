@@ -13,6 +13,7 @@ import { checkAuth } from './api/axios'
 import AddModal from './components/AddModal'
 import DonateModal from './components/DonateModal'
 import Campaign, { campaignLoader } from './pages/Campaign'
+import Donations, { donationLoader } from './pages/Donations'
 import ErrorPage from './pages/ErrorPage'
 import SignIn from './pages/Signin'
 import User from './pages/User'
@@ -66,6 +67,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'donatemodal',
+            loader: () => checkSignedIn(),
             element: <DonateModal />,
           },
           {
@@ -73,6 +75,11 @@ const router = createBrowserRouter([
             element: <AddModal />,
           },
         ],
+      },
+      {
+        path: 'donations',
+        element: <Donations />,
+        loader: () => donationLoader(queryClient),
       },
     ],
   },
