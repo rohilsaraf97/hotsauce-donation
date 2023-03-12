@@ -99,7 +99,7 @@ function DonateModal() {
 
   async function handleDonate() {
     if (balance.data) {
-      if (parseFloat(balance.data.formatted) >= amount) {
+      if (parseFloat(balance.data!.formatted) >= amount) {
         setNftLoading(true)
         sendTransaction?.()
       }
@@ -119,7 +119,7 @@ function DonateModal() {
           type="number"
           value={amount === 0 ? undefined : amount}
           min="0.001"
-          max={balance.data!.formatted}
+          max={balance.data ? balance.data!.formatted : 1}
           step="0.001"
           onChange={(e) => setAmount(parseFloat(e.target.value))}
           className="my-2 w-full rounded-md bg-gray-100 px-3 py-4 text-xl"
@@ -129,7 +129,9 @@ function DonateModal() {
           type="button"
           onClick={handleDonate}
           className="self-end rounded-md bg-yellow-600 px-2 py-2 text-sm text-white disabled:opacity-40"
-          disabled={amount > parseFloat(balance.data!.formatted)}
+          disabled={
+            balance.data ? amount > parseFloat(balance.data!.formatted) : true
+          }
         >
           Donate
         </button>

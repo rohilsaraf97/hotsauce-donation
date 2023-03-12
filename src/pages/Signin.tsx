@@ -54,7 +54,7 @@ function SignIn() {
             Sign In with MetaMask
           </button>
 
-          <a href="https://metamask.io/">
+          <a href="https://metamask.io/" target="_blank" rel="noreferrer">
             <button
               className="ml-2 mb-2 rounded-full bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
               type="button"
