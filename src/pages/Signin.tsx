@@ -4,6 +4,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 
 import { postRequestMessage, postVerify } from '../api/axios'
 import logo from '../assets/logo.png'
+import ElevatedCard from '../components/ElevatedCard'
 import Heading from '../components/Heading'
 import InfoBox from '../components/InfoBox'
 
@@ -46,12 +47,21 @@ function SignIn() {
         <div className="flex flex-row items-center ">
           {/* <h3 >Web3 Authentication</h3> */}
           <button
-            className="mb-2 rounded-full bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+            className="ml-2 mb-2 rounded-full bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             type="button"
             onClick={() => handleAuth()}
           >
-            Sign In with Metamask
+            Sign In with MetaMask
           </button>
+
+          <a href="https://metamask.io/">
+            <button
+              className="ml-2 mb-2 rounded-full bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+              type="button"
+            >
+              Get Started with MetaMask
+            </button>
+          </a>
         </div>
       </div>
       <Heading
@@ -64,7 +74,7 @@ function SignIn() {
           <div className="flex w-full flex-row items-center justify-evenly">
             <img alt="" src={logo} />
 
-            <p className="font-xl w-6/12 text-white">
+            <p className="font-xl w-6/12  text-xl text-white">
               Our goal is to enable charities and NGOs to provide help and
               support to those in need. We aim to use blockchain technology to
               ensure secure and transparent transactions. Donate MATIC using our
@@ -73,18 +83,56 @@ function SignIn() {
             </p>
             <img alt="" src={logo} />
           </div>
+          <div className="mt-5 mb-5 flex w-full flex-row items-center justify-evenly ">
+            <ElevatedCard
+              heading="Secure"
+              text="In blockchains,the data is structured into blocks and each block contains a transaction or bundle of transactions. Each new block connects to all the blocks before it in a cryptographic chain in such a way that it's nearly impossible to tamper with."
+            />
+            <ElevatedCard
+              heading="Transparent"
+              text="Transparency is arguably the blockchain's best quality. This is due to the fact that, in theory, the technology enables transactions that are traceable and immutable, allowing parties to trade in total confidence without the use of a middleman."
+            />
+            <ElevatedCard
+              heading="Traceable"
+              text="Users' retail networks can develop in a completely transparent and manageable way. Users can join, highlight, and track items or assets to make sure they are not applied incorrectly or sent back during the process, making it perfect for donations."
+            />
+          </div>
         </div>
       </div>
-      <div className="flex w-full flex-row items-center justify-evenly">
+      <div className="flex w-full flex-row items-center justify-between">
         <InfoBox
           heading="What is Polygon?"
           text="Polygon is a “layer two” or “sidechain” scaling solution that runs alongside the Ethereum blockchain allowing for speedy transactions and low fees. MATIC is the network’s native cryptocurrency, which is used for fees, staking, and more. You can buy or sell MATIC via exchanges like Coinbase."
         />
-
         <InfoBox
           heading="What is MATIC?"
-          text=" MATIC is Polygon's native cryptocurrency. It is an ERC-20 token, a token created on the Ethereum blockchain. This token is used to govern and secure the Polygon network and pay the network's transaction fees."
+          text=" MATIC is Polygon's native cryptocurrency. It is an ERC-20 token, a token created on the Ethereum blockchain. This token is used to govern and secure the Polygon network and pay the network's transaction fees. MATIC has low transaction fees and extremely fast transactions per second."
         />
+      </div>
+      <div className="flex flex-col bg-pink-500 pt-5 pb-5">
+        <Heading
+          text="What is MetaMask?"
+          headingStyle="bg-gradient-to-r from-black to-white bg-clip-text p-4 text-left text-5xl font-bold text-transparent"
+        />
+
+        <p className="font-xl w-6/12  w-11/12 p-4 text-justify text-xl text-white">
+          In essence, the Metamask wallet is a cryptocurrency wallet that
+          supports ETH-based tokens such the ERC-721 and ERC-20 tokens. It may
+          be installed just like any other browser extension because it is
+          available as a plugin for your browser. Curiously, after installing
+          the Metamask Chrome extension or Firefox extension, you can experience
+          a seamless connection to any Ethereum-based decentralized app. With
+          the wallet, you may quickly access any decentralized application, such
+          as yield farming protocols and NFT marketplaces.
+        </p>
+        <p className="font-xl w-6/12  w-11/12 p-4 text-justify text-xl text-white">
+          You can use MetaMask conveniently thanks to the option of web browser
+          integration in the form of plugins. This is likely one of the main
+          causes of its swiftly rising adoption rates. MetaMask can act as a
+          portal for you into a new world of exciting potential with dApps, web
+          browsing, DeFi, and blockchain technology as the need for a
+          decentralized web starts to pick up steam.
+        </p>
       </div>
     </div>
   )
