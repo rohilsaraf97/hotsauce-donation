@@ -119,7 +119,7 @@ function DonateModal() {
           type="number"
           value={amount === 0 ? undefined : amount}
           min="0.001"
-          max={balance.data!.formatted}
+          // max={balance.data!.formatted}
           step="0.001"
           onChange={(e) => setAmount(parseFloat(e.target.value))}
           className="my-2 w-full rounded-md bg-gray-100 px-3 py-4 text-xl"
@@ -129,7 +129,7 @@ function DonateModal() {
           type="button"
           onClick={handleDonate}
           className="self-end rounded-md bg-yellow-600 px-2 py-2 text-sm text-white disabled:opacity-40"
-          disabled={amount > parseFloat(balance.data!.formatted)}
+          // disabled={amount > parseFloat(balance.data!.formatted)}
         >
           Donate
         </button>

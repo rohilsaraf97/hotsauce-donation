@@ -66,7 +66,7 @@ function SignIn() {
       </div>
       <Heading
         text="CryptoCares: A different approach to donations"
-        headingStyle="bg-gradient-to-r from-yellow-300 to-sky-600 bg-clip-text p-4 text-center text-5xl font-bold text-transparent"
+        headingStyle="text-yellow-300 p-4 text-center text-5xl font-bold "
       />
       <div>
         <div className="flex flex-col items-center justify-center bg-sky-500 pt-5 pb-5">
@@ -99,7 +99,7 @@ function SignIn() {
           </div>
         </div>
       </div>
-      <div className="flex w-full flex-row items-center justify-between">
+      <div className="flex w-full flex-row items-center justify-between bg-yellow-300">
         <InfoBox
           heading="What is Polygon?"
           text="Polygon is a “layer two” or “sidechain” scaling solution that runs alongside the Ethereum blockchain allowing for speedy transactions and low fees. MATIC is the network’s native cryptocurrency, which is used for fees, staking, and more. You can buy or sell MATIC via exchanges like Coinbase."
@@ -109,13 +109,13 @@ function SignIn() {
           text=" MATIC is Polygon's native cryptocurrency. It is an ERC-20 token, a token created on the Ethereum blockchain. This token is used to govern and secure the Polygon network and pay the network's transaction fees. MATIC has low transaction fees and extremely fast transactions per second."
         />
       </div>
-      <div className="flex flex-col bg-pink-500 pt-5 pb-5">
+      <div className="flex flex-col bg-sky-500 pt-5 pb-5">
         <Heading
           text="What is MetaMask?"
-          headingStyle="bg-gradient-to-r from-black to-white bg-clip-text p-4 text-left text-5xl font-bold text-transparent"
+          headingStyle="text-yellow-300 p-4 text-left text-5xl font-bold "
         />
 
-        <p className="font-xl w-6/12  w-11/12 p-4 text-justify text-xl text-white">
+        <p className="font-xl w-6/12  w-full p-4 text-justify text-xl text-white">
           In essence, the Metamask wallet is a cryptocurrency wallet that
           supports ETH-based tokens such the ERC-721 and ERC-20 tokens. It may
           be installed just like any other browser extension because it is
@@ -125,7 +125,7 @@ function SignIn() {
           the wallet, you may quickly access any decentralized application, such
           as yield farming protocols and NFT marketplaces.
         </p>
-        <p className="font-xl w-6/12  w-11/12 p-4 text-justify text-xl text-white">
+        <p className="font-xl w-6/12  w-full p-4 text-justify text-xl text-white">
           You can use MetaMask conveniently thanks to the option of web browser
           integration in the form of plugins. This is likely one of the main
           causes of its swiftly rising adoption rates. MetaMask can act as a
