@@ -12,6 +12,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import { checkAuth } from './api/axios'
 import AddModal from './components/AddModal'
 import DonateModal from './components/DonateModal'
+import Home from './components/Home'
 import Campaign, { campaignLoader } from './pages/Campaign'
 import Donations, { donationLoader } from './pages/Donations'
 import ErrorPage from './pages/ErrorPage'
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
         path: 'donations',
         element: <Donations />,
         loader: () => donationLoader(queryClient),
+      },
+      {
+        path: 'home',
+        element: <Home />, // add home page component,
       },
     ],
   },

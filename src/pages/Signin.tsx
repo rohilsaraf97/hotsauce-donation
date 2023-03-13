@@ -33,7 +33,7 @@ function SignIn() {
     const signature = await signMessageAsync({ message })
     await postVerify({ message, signature })
 
-    navigate('/user')
+    navigate('/user/home')
   }
 
   return (

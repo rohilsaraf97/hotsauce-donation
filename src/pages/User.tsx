@@ -16,7 +16,10 @@ export default function User() {
   return (
     <div className="flex flex-col font-poppins text-lg">
       <div className="sticky top-0 z-50 flex items-center justify-between bg-yellow-400 px-10 text-white">
-        <div>Fund3</div>
+        <div>
+          <NavLink to="/user/home">Fund3</NavLink>
+        </div>
+
         <div className="flex items-center gap-4">
           <Link
             to="/user/campaigns/add"
@@ -24,6 +27,7 @@ export default function User() {
           >
             <AiOutlinePlus className="text-2xl" />
           </Link>
+
           <NavLink
             to="/user/campaigns"
             className={({ isActive }) =>

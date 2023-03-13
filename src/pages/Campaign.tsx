@@ -29,29 +29,37 @@ function Campaign() {
       <div className="my-10 mx-auto flex w-[80%] flex-col gap-6">
         {campaignsQueryResult.data.reverse().map((cpn: any) => {
           return (
-            <div
-              className="flex flex-col rounded-md bg-gray-50 px-4 py-2 shadow-md "
-              // eslint-disable-next-line no-underscore-dangle
+            <div // eslint-disable-next-line no-underscore-dangle
               key={cpn._id}
+              className="flex justify-center"
             >
-              <div className="flex items-center justify-between border-b-2 ">
-                <span className="text-xl font-bold">{cpn.title}</span>
-                <p className="py-4 text-sm font-bold">
-                  By: {cpn.owner.address}
-                </p>
+              <div className="flex w-full flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700  md:flex-row">
+                <img
+                  className="h-60 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                  src="https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"
+                  alt=""
+                />
+                <div className="flex w-full flex-col justify-start p-6">
+                  <div className="flex flex-row justify-between">
+                    <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
+                      {cpn.title}
+                    </h5>
+                    <h5 className='"mb-2 dark:text-neutral-50" pl-1 text-xl font-medium text-neutral-800'>
+                      By {cpn.owner.address}
+                    </h5>
+                  </div>
+                  <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                    {cpn.description}
+                  </p>
+                  <Link
+                    to="donatemodal"
+                    state={{ background: location, cpnData: cpn }}
+                    className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
+                  >
+                    Donate
+                  </Link>
+                </div>
               </div>
-              <p className="py-4 text-sm font-bold">
-                {cpn.description} Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Atque minima dolor sapiente quibusdam possimus
-                eos quidem esse fugiat voluptates ratione!{' '}
-              </p>
-              <Link
-                to="donatemodal"
-                state={{ background: location, cpnData: cpn }}
-                className="self-end rounded-md bg-yellow-600 px-2 py-2 text-sm text-white"
-              >
-                Donate
-              </Link>
             </div>
           )
         })}
