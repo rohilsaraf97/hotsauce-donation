@@ -19,8 +19,8 @@ function Home() {
               1.
             </p>
             <p className="font-xl w-full p-3  text-justify text-black">
-              Campaigns are available on the NavBar and you can use the balance
-              present in your MetaMask wallet to perform donations.
+              Now that you have logged in, you can use the balance in your
+              MetaMask wallet to make donations
             </p>
           </div>
           <div className="flex flex-row ">
@@ -37,8 +37,8 @@ function Home() {
               3.
             </p>
             <p className="font-xl w-full p-3 text-justify text-black">
-              Campaigns are available on the NavBar and you can use the balance
-              present in your MetaMask wallet to perform donations.
+              To view our donation campaigns, kindly click the Campaigns tab in
+              thr Navbar.
             </p>
           </div>
           <div className="flex flex-row ">
