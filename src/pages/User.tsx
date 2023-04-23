@@ -44,6 +44,14 @@ export default function User() {
           >
             Donations
           </NavLink>
+          <NavLink
+            to="/user/subscriptions"
+            className={({ isActive }) =>
+              isActive ? 'bg-yellow-800 px-2 py-4' : 'px-2 py-4'
+            }
+          >
+            Subscriptions
+          </NavLink>
           <button type="button" onClick={signOut}>
             Sign Out
           </button>

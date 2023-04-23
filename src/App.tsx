@@ -13,10 +13,12 @@ import { checkAuth } from './api/axios'
 import AddModal from './components/AddModal'
 import DonateModal from './components/DonateModal'
 import Home from './components/Home'
+import SubscribeModal from './components/SubscribeModal'
 import Campaign, { campaignLoader } from './pages/Campaign'
 import Donations, { donationLoader } from './pages/Donations'
 import ErrorPage from './pages/ErrorPage'
 import SignIn from './pages/Signin'
+import Subscriptions, { subscriptionLoader } from './pages/Subscriptions'
 import User from './pages/User'
 
 const { provider, webSocketProvider } = configureChains(
@@ -72,6 +74,11 @@ const router = createBrowserRouter([
             element: <DonateModal />,
           },
           {
+            path: 'subscribemodal',
+            loader: () => checkSignedIn(),
+            element: <SubscribeModal />,
+          },
+          {
             path: 'add',
             element: <AddModal />,
           },
@@ -81,6 +88,11 @@ const router = createBrowserRouter([
         path: 'donations',
         element: <Donations />,
         loader: () => donationLoader(queryClient),
+      },
+      {
+        path: 'Subscriptions',
+        element: <Subscriptions />,
+        loader: () => subscriptionLoader(queryClient),
       },
       {
         path: 'home',

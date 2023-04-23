@@ -1,6 +1,8 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 import { Link, Outlet, useLoaderData, useLocation } from 'react-router-dom'
 
+import { checkAuth } from '../api/axios'
 import { getAllCampaignsQuery } from '../api/tanstack'
 
 export const campaignLoader = (queryClient: QueryClient) => async () => {
@@ -21,13 +23,30 @@ function Campaign() {
     initialData,
   })
 
+  const [selectedAddress, setSelectedAddress] = useState('')
+
+  useEffect(() => {
+    const getAddress = async () => {
+      const resp = await checkAuth()
+      const { iat, ...authData } = resp.data
+      const session = authData
+      setSelectedAddress(session.address)
+    }
+    getAddress()
+  }, [])
+
   let content
 
   if (campaignsQueryResult.isLoading) content = <div>Loading</div>
   else if (campaignsQueryResult.isSuccess)
     content = (
-      <div className="my-10 mx-auto flex w-[80%] flex-col gap-6">
+      <div className="mx-auto my-10 flex w-[80%] flex-col gap-6">
         {campaignsQueryResult.data.reverse().map((cpn: any) => {
+          console.log(
+            'asdfg',
+            cpn.owner.address.toUpperCase(),
+            selectedAddress.toUpperCase()
+          )
           return (
             <div // eslint-disable-next-line no-underscore-dangle
               key={cpn._id}
@@ -51,13 +70,25 @@ function Campaign() {
                   <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                     {cpn.description}
                   </p>
-                  <Link
-                    to="donatemodal"
-                    state={{ background: location, cpnData: cpn }}
-                    className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
-                  >
-                    Donate
-                  </Link>
+                  {cpn.owner.address.toUpperCase() !==
+                    selectedAddress.toUpperCase() && (
+                    <div className="flex gap-4 ">
+                      <Link
+                        to="donatemodal"
+                        state={{ background: location, cpnData: cpn }}
+                        className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
+                      >
+                        Donate
+                      </Link>
+                      <Link
+                        to="subscribemodal"
+                        state={{ background: location, cpnData: cpn }}
+                        className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
+                      >
+                        Subscribe
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
