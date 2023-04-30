@@ -36,6 +36,7 @@ function Campaign() {
   }, [])
 
   let content
+  console.log(campaignsQueryResult.data)
 
   if (campaignsQueryResult.isLoading) content = <div>Loading</div>
   else if (campaignsQueryResult.isSuccess)
@@ -86,6 +87,18 @@ function Campaign() {
                         className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
                       >
                         Subscribe
+                      </Link>
+                    </div>
+                  )}
+                  {cpn.owner.address.toUpperCase() ===
+                    selectedAddress.toUpperCase() && (
+                    <div>
+                      <Link
+                        to="update"
+                        state={{ background: location, cpnData: cpn }}
+                        className="mr-2 mb-2 rounded-lg bg-yellow-400 px-5 py-2.5 text-sm font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
+                      >
+                        Edit
                       </Link>
                     </div>
                   )}

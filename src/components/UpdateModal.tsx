@@ -1,12 +1,15 @@
 /* eslint-disable no-nested-ternary */
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { addCampaign } from '../api/axios'
 
-function AddModal() {
+function UpdateModal() {
+  const location = useLocation()
+  const campaignInfo = location?.state?.cpnData || undefined
+
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const campaignMutation = useMutation({
@@ -47,13 +50,13 @@ function AddModal() {
         aria-hidden="true"
       >
         <div className="flex flex-col gap-1 border-b-2 py-2">
-          <span className="text-2xl">Add a new Campaign</span>
+          <span className="text-2xl">Update Campaign</span>
           <span className="text-md">We will help support your cause</span>
         </div>
         <Formik
           initialValues={{
-            title: '',
-            description: '',
+            title: campaignInfo.title,
+            description: campaignInfo.description,
             image: '',
           }}
           validationSchema={Yup.object({
@@ -110,10 +113,10 @@ function AddModal() {
                 >
                   <span>
                     {campaignMutation.isSuccess
-                      ? 'Created'
+                      ? 'Updated'
                       : campaignMutation.isLoading
                       ? 'Loading'
-                      : 'Create'}
+                      : 'Update'}
                   </span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -139,4 +142,4 @@ function AddModal() {
   )
 }
 
-export default AddModal
+export default UpdateModal
