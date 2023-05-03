@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Heading from './Heading'
+import Heading from './SignIn/Heading'
 
 function Home() {
   return (

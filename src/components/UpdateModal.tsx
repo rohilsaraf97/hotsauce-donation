@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { addCampaign } from '../api/axios'
+import editCampaign from '../api/axios/campaigns/editCampaign'
 
 function UpdateModal() {
   const location = useLocation()
@@ -17,23 +17,27 @@ function UpdateModal() {
       title: string
       description: string
       image: string
-    }) => addCampaign(campaignDetails),
+      campaignId: string
+    }) => editCampaign(campaignDetails),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['campaigns'] })
     },
   })
-
-  async function handleAdd(values: {
+  async function handleEdit(values: {
     title: string
     description: string
     image: string
   }) {
     // upload fn for image, fetch url from here and upload to db.
-    campaignMutation.mutate(values, {
-      onSuccess: () => {
-        navigate(-1)
-      },
-    })
+    campaignMutation.mutate(
+      // eslint-disable-next-line no-underscore-dangle
+      { ...values, campaignId: campaignInfo._id },
+      {
+        onSuccess: () => {
+          navigate(-1)
+        },
+      }
+    )
   }
 
   return (
@@ -57,14 +61,15 @@ function UpdateModal() {
           initialValues={{
             title: campaignInfo.title,
             description: campaignInfo.description,
-            image: '',
+            image: campaignInfo.thumbnailId,
           }}
           validationSchema={Yup.object({
             title: Yup.string().required('Title required').max(40),
             description: Yup.string().required('Description required'),
+            image: Yup.mixed(),
           })}
           // eslint-disable-next-line react/jsx-no-bind
-          onSubmit={handleAdd}
+          onSubmit={handleEdit}
         >
           {(props: FormikProps<any>) => (
             <Form>
@@ -101,8 +106,15 @@ function UpdateModal() {
                   />
                 </div>
                 <div className="my-4 flex flex-col gap-2">
-                  <span className="text-md">Image upload</span>
-                  <input type="file" name="Image" />
+                  <span className="text-md">Update Image</span>
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={(e) =>
+                      props.setFieldValue('image', e.currentTarget.files![0])
+                    }
+                  />
                 </div>
                 <button
                   type="submit"

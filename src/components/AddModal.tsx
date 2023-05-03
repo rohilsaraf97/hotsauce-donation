@@ -23,7 +23,7 @@ function AddModal() {
   async function handleAdd(values: {
     title: string
     description: string
-    image: string
+    image: any
   }) {
     // upload fn for image, fetch url from here and upload to db.
     campaignMutation.mutate(values, {
@@ -59,12 +59,13 @@ function AddModal() {
           validationSchema={Yup.object({
             title: Yup.string().required('Title required').max(40),
             description: Yup.string().required('Description required'),
+            image: Yup.mixed().required('File is required'),
           })}
           // eslint-disable-next-line react/jsx-no-bind
           onSubmit={handleAdd}
         >
           {(props: FormikProps<any>) => (
-            <Form>
+            <Form encType="multipart/form-data">
               <div className="my-4 flex flex-col gap-2">
                 <div>
                   <Field
@@ -99,7 +100,14 @@ function AddModal() {
                 </div>
                 <div className="my-4 flex flex-col gap-2">
                   <span className="text-md">Image upload</span>
-                  <input type="file" name="Image" />
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={(e) =>
+                      props.setFieldValue('image', e.currentTarget.files![0])
+                    }
+                  />
                 </div>
                 <button
                   type="submit"
