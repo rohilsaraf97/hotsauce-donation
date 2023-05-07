@@ -48,15 +48,15 @@ function Campaign() {
               key={cpn._id}
               className="flex justify-center"
             >
-              <div className="shadow-l flex w-full flex-col rounded-lg border border-gray-300 bg-gray-50 md:flex-row">
+              <div className="shadow-l flex w-full flex-col rounded-lg border border-gray-300 bg-gray-50 bg-slate-200 sm:flex-col md:flex-row">
                 <img
                   className="object-fit h-[10rem] min-w-[12rem] max-w-[12rem] rounded-t-lg md:rounded-none md:rounded-l-lg"
                   src={`${config.SERVER_URL}/images/${cpn.thumbnailId}`}
                   alt=""
                 />
                 <div className="flex w-full flex-col justify-start p-6">
-                  <div className="flex flex-row justify-between">
-                    <h5 className="mb-2 text-xl font-medium text-neutral-800">
+                  <div className="flex justify-between sm:flex-col sm:pb-2 md:flex-row">
+                    <h5 className=" mb-2 text-xl font-medium text-neutral-800">
                       {cpn.title}
                     </h5>
                     <h5 className='"mb-2 pl-1 text-xl font-medium text-neutral-800'>

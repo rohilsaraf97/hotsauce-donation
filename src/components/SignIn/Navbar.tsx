@@ -34,7 +34,7 @@ function Navbar() {
   }
   return (
     <div className="sticky top-0 z-50 flex flex-row items-center justify-between bg-white/20 px-[7rem] py-4 backdrop-blur-lg">
-      <div className="flex flex-row items-center">
+      <div className="mr-2 flex flex-row items-center">
         <img alt="" src={logo} className="h-[3rem] p-2" />
         <h2>CryptoCares</h2>
       </div>
@@ -42,7 +42,7 @@ function Navbar() {
       <div className="flex flex-row items-center ">
         {/* <h3 >Web3 Authentication</h3> */}
         <button
-          className="mb-2 ml-2 rounded bg-yellow-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300"
+          className="sm:text:xs rounded bg-yellow-400 text-center font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 sm:mb-2 sm:ml-2 sm:px-2.5 sm:py-1 md:mb-2 md:ml-2 md:px-5 md:py-2.5 md:text-sm"
           type="button"
           onClick={() => handleAuth()}
         >
@@ -51,8 +51,8 @@ function Navbar() {
 
         <a href="https://metamask.io/" target="_blank" rel="noreferrer">
           <button
-            className="mb-2 ml-2 rounded bg-yellow-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300"
             type="button"
+            className="sm:text:xs rounded bg-yellow-400 text-center font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 sm:mb-2 sm:ml-2 sm:px-2.5 sm:py-1 md:mb-2 md:ml-2 md:px-5 md:py-2.5 md:text-sm"
           >
             Get Started with MetaMask
           </button>

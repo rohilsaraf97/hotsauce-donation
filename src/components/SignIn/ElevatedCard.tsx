@@ -12,8 +12,12 @@ function ElevatedCard({ heading, text, icon }: BoxContent) {
       <span className="rounded-full bg-yellow-50 p-4 text-[3.5rem] text-yellow-500">
         {icon}
       </span>
-      <h2 className="text-center text-xl font-bold text-black">{heading}</h2>
-      <p className="font-xl mt-2 w-full text-justify text-black">{text}</p>
+      <h2 className="sm:text-l text-center font-bold text-black md:text-xl">
+        {heading}
+      </h2>
+      <p className="md:font-xl sm:font-l mt-2 w-full text-justify text-black">
+        {text}
+      </p>
     </div>
   )
 }
