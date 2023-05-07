@@ -162,25 +162,25 @@ function Subscriptions() {
   if (subscriptionsQueryResult.isLoading) content = <div>Loading</div>
   else if (subscriptionsQueryResult.isSuccess)
     content = (
-      <table className="w-full text-left text-sm">
+      <table className="w-full border-separate text-left text-sm">
         <thead className=" bg-gray-200 text-xs uppercase">
           <tr>
-            <th scope="col" className=" px-6 py-3  ">
+            <th scope="col" className="bg-yellow-400 px-6 py-3  ">
               Amount/month
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="bg-yellow-400 px-6 py-3">
               To
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="bg-yellow-400 px-6 py-3">
               Token URI
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="bg-yellow-400 px-6 py-3">
               NFT Transaction
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="bg-yellow-400 px-6 py-3">
               Donation Transaction
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="bg-yellow-400 px-6 py-3">
               Action
             </th>
           </tr>
