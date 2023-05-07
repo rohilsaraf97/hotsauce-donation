@@ -42,7 +42,7 @@ function Navbar() {
       <div className="flex flex-row items-center ">
         {/* <h3 >Web3 Authentication</h3> */}
         <button
-          className="sm:text:xs rounded bg-yellow-400 text-center font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 sm:mb-2 sm:ml-2 sm:px-2.5 sm:py-1 md:mb-2 md:ml-2 md:px-5 md:py-2.5 md:text-sm"
+          className="text:xs mb-2 ml-2 rounded bg-yellow-400 px-2.5 py-1 text-center font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 lg:mb-2 lg:ml-2 lg:px-5 lg:py-2.5 lg:text-sm"
           type="button"
           onClick={() => handleAuth()}
         >
@@ -52,7 +52,7 @@ function Navbar() {
         <a href="https://metamask.io/" target="_blank" rel="noreferrer">
           <button
             type="button"
-            className="sm:text:xs rounded bg-yellow-400 text-center font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 sm:mb-2 sm:ml-2 sm:px-2.5 sm:py-1 md:mb-2 md:ml-2 md:px-5 md:py-2.5 md:text-sm"
+            className="text:xs mb-2 ml-2 rounded bg-yellow-400 px-2.5 py-1 text-center font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 lg:mb-2 lg:ml-2 lg:px-5 lg:py-2.5 lg:text-sm"
           >
             Get Started with MetaMask
           </button>

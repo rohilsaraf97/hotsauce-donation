@@ -48,18 +48,18 @@ function Campaign() {
               key={cpn._id}
               className="flex justify-center"
             >
-              <div className="shadow-l flex w-full flex-col rounded-lg border border-gray-300 bg-gray-50 bg-slate-200 sm:flex-col md:flex-row">
+              <div className="flex w-full flex-col rounded-lg border border-gray-300 bg-gray-50 shadow-lg lg:flex-row">
                 <img
-                  className="object-fit h-[10rem] min-w-[12rem] max-w-[12rem] rounded-t-lg md:rounded-none md:rounded-l-lg"
+                  className="object-fit h-[15rem] w-full rounded-t-lg lg:h-[12rem] lg:w-[12rem] lg:rounded-none lg:rounded-l-lg"
                   src={`${config.SERVER_URL}/images/${cpn.thumbnailId}`}
                   alt=""
                 />
                 <div className="flex w-full flex-col justify-start p-6">
-                  <div className="flex justify-between sm:flex-col sm:pb-2 md:flex-row">
-                    <h5 className=" mb-2 text-xl font-medium text-neutral-800">
+                  <div className="flex flex-col justify-between lg:flex-row">
+                    <h5 className="mb-2 text-xl font-medium text-neutral-800">
                       {cpn.title}
                     </h5>
-                    <h5 className='"mb-2 pl-1 text-xl font-medium text-neutral-800'>
+                    <h5 className='"mb-2 text-xl font-medium text-neutral-800'>
                       By {cpn.owner.address}
                     </h5>
                   </div>
@@ -72,14 +72,14 @@ function Campaign() {
                       <Link
                         to="donatemodal"
                         state={{ background: location, cpnData: cpn }}
-                        className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
+                        className="rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
                       >
                         Donate
                       </Link>
                       <Link
                         to="subscribemodal"
                         state={{ background: location, cpnData: cpn }}
-                        className="w-1/12 rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
+                        className="rounded-md bg-yellow-600 px-2 py-2 text-center text-sm text-white"
                       >
                         Subscribe
                       </Link>
@@ -106,7 +106,7 @@ function Campaign() {
     )
   return (
     <>
-      <div className="mx-[7rem] my-8 flex flex-col gap-8">
+      <div className="mx-4 my-8 flex flex-col gap-8 lg:mx-[7rem]">
         <span className="text-3xl font-extrabold">Campaigns</span>
         {content}
       </div>

@@ -11,9 +11,9 @@ function Cards() {
       <div className="mx-[7rem]">
         <Heading
           text="Why use the blockchain for donations?"
-          headingStyle="text-black md:text-5xl sm:text-4xl font-bold text-center"
+          headingStyle="text-black lg:text-5xl text-4xl font-bold text-center"
         />
-        <div className="flex w-full items-center gap-12 pt-[4rem] sm:flex-col md:flex-row">
+        <div className="flex w-full flex-col items-center gap-12 pt-[4rem] lg:flex-row">
           <ElevatedCard
             heading="Secure"
             text="In blockchains, the data is structured into blocks and each block contains a transaction or bundle of transactions. Each new block connects to all the blocks before it in a cryptographic chain in such a way that it's nearly impossible to tamper with."

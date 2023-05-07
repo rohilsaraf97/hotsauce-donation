@@ -243,7 +243,7 @@ function Subscriptions() {
                   </td>
                   <td className="text-center" onClick={() => handleDelete(obj)}>
                     {loading ? (
-                      'deleteing'
+                      'deleting'
                     ) : (
                       <AiFillCloseCircle className="cursor-pointer text-xl text-red-500 hover:scale-[1.15]" />
                     )}
