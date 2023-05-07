@@ -28,7 +28,7 @@ function AddModal() {
     // upload fn for image, fetch url from here and upload to db.
     campaignMutation.mutate(values, {
       onSuccess: () => {
-        navigate(-1)
+        navigate('/user/campaigns')
       },
     })
   }

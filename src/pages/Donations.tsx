@@ -110,7 +110,12 @@ function Donations() {
       </table>
     )
 
-  return <div className="mx-4 my-4">{content}</div>
+  return (
+    <div className="mx-[7rem] my-8 flex flex-col gap-8">
+      <span className="text-3xl font-extrabold">Donations</span>
+      {content}
+    </div>
+  )
 }
 
 export default Donations

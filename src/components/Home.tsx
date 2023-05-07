@@ -9,7 +9,7 @@ function Home() {
         text="Welcome to the future of donations!"
         headingStyle="text-black p-10 text-center text-5xl font-bold"
       />
-      <div className="m-5 w-11/12 rounded-3xl bg-white p-4 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] ">
+      <div className="border-gray m-5 w-11/12 rounded-3xl border border-gray-500 p-4 ">
         <h2 className="t p-4 text-center text-3xl font-bold text-yellow-300">
           How do our donations work?
         </h2>

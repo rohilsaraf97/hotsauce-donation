@@ -1,5 +1,12 @@
-import { QueryClient, useQuery } from '@tanstack/react-query'
-import React from 'react'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import { Framework } from '@superfluid-finance/sdk-core'
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
+import axios from 'axios'
+import { ethers } from 'ethers'
+import React, { useState } from 'react'
+import { AiFillCloseCircle } from 'react-icons/ai'
 import { FiExternalLink } from 'react-icons/fi'
 import { useLoaderData } from 'react-router-dom'
 
@@ -21,6 +28,134 @@ function Subscriptions() {
     ...getAllSubscriptionsQuery(),
     initialData,
   })
+
+  const queryClient = useQueryClient()
+  const [loading, setLoading] = useState(false)
+
+  async function updateExistingFlow(flowRate: string, recipient: string) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider.send('eth_requestAccounts', [])
+    const signer = provider.getSigner()
+    const chainId = await window.ethereum!.request({ method: 'eth_chainId' })
+    const sf = await Framework.create({
+      chainId: Number(chainId),
+      provider,
+    })
+    const superSigner = sf.createSigner({ signer })
+    await superSigner.getAddress()
+    const maticx = await sf.loadSuperToken('MATICx')
+    try {
+      const updateFlowOperation = maticx.updateFlow({
+        sender: await superSigner.getAddress(),
+        receiver: recipient,
+        flowRate,
+      })
+      const result = await updateFlowOperation.exec(superSigner)
+      console.log("Congrats - you've just updated a money stream!")
+      return result
+    } catch (error) {
+      console.log('Error in update flow')
+      console.error(error)
+    }
+    return false
+  }
+
+  async function deleteFlow(recipient: string) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider.send('eth_requestAccounts', [])
+    const signer = provider.getSigner()
+    const chainId = await window.ethereum!.request({ method: 'eth_chainId' })
+    const sf = await Framework.create({
+      chainId: Number(chainId),
+      provider,
+    })
+    const superSigner = sf.createSigner({ signer })
+    const maticx = await sf.loadSuperToken('MATICx')
+    try {
+      const deleteFlowOperation = maticx.deleteFlow({
+        sender: await signer.getAddress(),
+        receiver: recipient,
+      })
+      await deleteFlowOperation.exec(superSigner)
+      console.log(
+        `Congrats - you've just deleted a money stream!
+    `
+      )
+    } catch (error) {
+      console.log('Error in Delete flow')
+      console.error(error)
+    }
+  }
+
+  const calculateFlowRate = (amountInEther: number) => {
+    if (typeof Number(amountInEther) === 'number') {
+      const monthlyAmount = ethers.utils.parseEther(amountInEther.toString())
+      const calculatedFlowRate = Math.floor(monthlyAmount / 3600 / 24 / 30)
+      return calculatedFlowRate.toString()
+    }
+    return '38580246913'
+  }
+
+  const getSubs = (selectedCampaign: any) => {
+    let currentAmount
+    if (subscriptionsQueryResult.isSuccess) {
+      currentAmount = subscriptionsQueryResult.data?.reduce((acc, currVal) => {
+        if (
+          selectedCampaign.campaign.owner.address.toUpperCase() ===
+          currVal.campaign.owner.address.toUpperCase()
+        )
+          return acc + 1
+        return acc
+      }, 0)
+    }
+    return currentAmount
+  }
+
+  const getAmount = (selectedCampaign: any) => {
+    let currentAmount
+    if (subscriptionsQueryResult.isSuccess) {
+      currentAmount = subscriptionsQueryResult.data?.reduce((acc, currVal) => {
+        if (
+          selectedCampaign.campaign.owner.address.toUpperCase() ===
+          currVal.campaign.owner.address.toUpperCase()
+        )
+          return acc + currVal.amount
+        return acc
+      }, 0)
+    }
+    return currentAmount
+  }
+
+  const handleDelete = async (cpnObj: any) => {
+    setLoading(true)
+    let txDetails
+    const currentSubs = getSubs(cpnObj)
+    const currentAmount = getAmount(cpnObj)
+    try {
+      if (currentSubs > 1) {
+        const calculatedFlowRate = calculateFlowRate(
+          currentAmount - cpnObj.amount
+        )
+        txDetails = await updateExistingFlow(
+          calculatedFlowRate,
+          cpnObj.campaign.owner.address
+        )
+      } else {
+        txDetails = await deleteFlow(cpnObj.campaign.owner.address)
+      }
+      const resp = await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/subscription/delete`,
+        {
+          data: cpnObj,
+          withCredentials: true,
+        }
+      )
+      setLoading(false)
+      queryClient.invalidateQueries({ queryKey: ['subscriptions'] })
+    } catch (err) {
+      console.log('error', err)
+    }
+  }
 
   let content
 
@@ -44,6 +179,9 @@ function Subscriptions() {
             </th>
             <th scope="col" className="px-6 py-3">
               Donation Transaction
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Action
             </th>
           </tr>
         </thead>
@@ -103,6 +241,13 @@ function Subscriptions() {
                       </span>
                     </a>
                   </td>
+                  <td className="text-center" onClick={() => handleDelete(obj)}>
+                    {loading ? (
+                      'deleteing'
+                    ) : (
+                      <AiFillCloseCircle className="cursor-pointer text-xl text-red-500 hover:scale-[1.15]" />
+                    )}
+                  </td>
                 </tr>
               )
             })}
@@ -110,7 +255,12 @@ function Subscriptions() {
       </table>
     )
 
-  return <div className="mx-4 my-4">{content}</div>
+  return (
+    <div className="mx-[7rem] my-8 flex flex-col gap-8">
+      <span className="text-3xl font-extrabold">Subscriptions</span>
+      {content}
+    </div>
+  )
 }
 
 export default Subscriptions

@@ -41,7 +41,7 @@ function Campaign() {
   if (campaignsQueryResult.isLoading) content = <div>Loading</div>
   else if (campaignsQueryResult.isSuccess)
     content = (
-      <div className="mx-auto my-10 flex w-[80%] flex-col gap-6">
+      <div className="flex w-[100%] flex-col gap-6">
         {campaignsQueryResult.data.reverse().map((cpn: any) => {
           return (
             <div // eslint-disable-next-line no-underscore-dangle
@@ -106,8 +106,11 @@ function Campaign() {
     )
   return (
     <>
+      <div className="mx-[7rem] my-8 flex flex-col gap-8">
+        <span className="text-3xl font-extrabold">Campaigns</span>
+        {content}
+      </div>
       <Outlet />
-      {content}
     </>
   )
 }

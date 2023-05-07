@@ -1,4 +1,5 @@
 import { getAllCampaigns, getAllDonations, getAllSubscriptions } from '../axios'
+import getActivity from '../axios/donations/getActivity'
 
 // eslint-disable-next-line import/prefer-default-export
 export const getAllCampaignsQuery = () => ({
@@ -22,6 +23,15 @@ export const getAllDonationsQuery = () => ({
 export const getAllSubscriptionsQuery = () => ({
   queryKey: ['subscripitons'],
   queryFn: getAllSubscriptions,
+  select: (data: any) => {
+    const allCampaigns = data.data
+    return allCampaigns
+  },
+})
+
+export const getActivityQuery = () => ({
+  queryKey: ['activity'],
+  queryFn: getActivity,
   select: (data: any) => {
     const allCampaigns = data.data
     return allCampaigns
