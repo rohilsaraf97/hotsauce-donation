@@ -162,36 +162,36 @@ function Subscriptions() {
   if (subscriptionsQueryResult.isLoading) content = <div>Loading</div>
   else if (subscriptionsQueryResult.isSuccess)
     content = (
-      <table className="w-full border-separate text-left text-sm">
-        <thead className=" bg-gray-200 text-xs uppercase">
+      <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+        <thead className=" bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="bg-yellow-400 px-6 py-3  ">
+            <th scope="col" className="bg-yellow-200 px-6 py-3  ">
               Amount/month
             </th>
-            <th scope="col" className="bg-yellow-400 px-6 py-3">
+            <th scope="col" className="bg-yellow-200 px-6 py-3">
               To
             </th>
-            <th scope="col" className="bg-yellow-400 px-6 py-3">
+            <th scope="col" className="bg-yellow-200 px-6 py-3">
               Token URI
             </th>
-            <th scope="col" className="bg-yellow-400 px-6 py-3">
+            <th scope="col" className="bg-yellow-200 px-6 py-3">
               NFT Transaction
             </th>
-            <th scope="col" className="bg-yellow-400 px-6 py-3">
+            <th scope="col" className="bg-yellow-200 px-6 py-3">
               Donation Transaction
             </th>
-            <th scope="col" className="bg-yellow-400 px-6 py-3">
+            <th scope="col" className="bg-yellow-200 px-6 py-3">
               Action
             </th>
           </tr>
         </thead>
-        <tbody className="h-2 overflow-hidden bg-yellow-100">
+        <tbody>
           {subscriptionsQueryResult?.data
             .reverse()
             .map((obj: any, index: number) => {
               return (
                 <tr
-                  className="text-md border-b border-yellow-400 font-bold text-black "
+                  className="text-md border-b bg-white font-bold text-black dark:border-gray-700 dark:bg-gray-800 "
                   // eslint-disable-next-line no-underscore-dangle
                   key={obj._id}
                 >
@@ -243,9 +243,9 @@ function Subscriptions() {
                   </td>
                   <td className="text-center" onClick={() => handleDelete(obj)}>
                     {loading ? (
-                      'deleting'
+                      'Deleting...'
                     ) : (
-                      <AiFillCloseCircle className="cursor-pointer text-xl text-red-500 hover:scale-[1.15]" />
+                      <AiFillCloseCircle className="flex cursor-pointer items-center gap-2 text-xl text-red-500 hover:scale-[1.15]" />
                     )}
                   </td>
                 </tr>
